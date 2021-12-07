@@ -5,7 +5,7 @@
 1. adb @server and @client
 
 ```shell
-pamac install android-tools
+pamac install android-tools # for arch linux
 ```
 
 2. manually configure in android developer options:
@@ -58,3 +58,4 @@ adb pull /system/product/app/messaging/messaging.apk /tmp/messaging.apk
 ```shell
 adb install-multiple app.apk config.apk
 ```
+* Run AnyDesk: https://support.google.com/android/thread/13791498/disable-warning-about-casting?hl=en&msgid=62539685

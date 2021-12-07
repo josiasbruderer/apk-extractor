@@ -5,5 +5,5 @@ This can be used to grab apk files from play store.
 Try out: 
 
 ```shell
-./test.sh
+./backend/test.sh
 ```
