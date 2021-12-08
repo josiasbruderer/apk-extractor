@@ -69,6 +69,7 @@ else
 		echo "successfully installed $1"
 	else
 		echo "error installing $1"
+		echo "error installing $1" >> debug/errors.log
 		exit 1
 	fi
 fi
