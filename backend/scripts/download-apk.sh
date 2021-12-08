@@ -42,6 +42,7 @@ sleep 2
 adb shell screencap -p > debug/$1/02.jpg
 
 newinstall=0
+error=0
 
 if [ "$(adb shell pm list packages $1)" == "package:$1" ]; then
 	echo "installation found for $1"
@@ -92,20 +93,23 @@ else
         else
           echo "error installing $1"
           echo "error installing $1" >> debug/errors.log
+          error=1
         fi
       fi
 	fi
 fi
 
-mkdir -p apps/$1
-rm apps/$1/* 2> /dev/null
+if [[ $error -eq 0 ]]; then
+  mkdir -p apps/$1
+  rm apps/$1/* 2> /dev/null
 
-adb shell pm path $1 | grep -oE '(\/data.*)' | while read p; do
-	adb pull $p apps/$1/
-done
+  adb shell pm path $1 | grep -oE '(\/data.*)' | while read p; do
+    adb pull $p apps/$1/
+  done
 
-echo "successfully downloaded $1"
-echo "successfully downloaded $1" >> debug/success.log
+  echo "successfully downloaded $1"
+  echo "successfully downloaded $1" >> debug/success.log
+fi
 
 if [ $newinstall -eq 1 ]; then
 	sleep 5
