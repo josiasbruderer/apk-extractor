@@ -23,8 +23,8 @@ adb connect $androidDevice
 sleep 5
 adb shell screencap -p > debug/initial_before-restart.jpg
 yes | cp "debug/initial_before-restart.jpg" "../frontend/debug/" -rf
-#adb reboot # restart device for a clean state
-#sleep 60
+adb reboot # restart device for a clean state
+sleep 60
 adb shell screencap -p > debug/initial_after-restart.jpg
 yes | cp "debug/initial_after-restart.jpg" "../frontend/debug/" -rf
 
