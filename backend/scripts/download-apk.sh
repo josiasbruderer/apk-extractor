@@ -105,6 +105,7 @@ adb shell pm path $1 | grep -oE '(\/data.*)' | while read p; do
 done
 
 echo "successfully downloaded $1"
+echo "successfully downloaded $1" >> debug/success.log
 
 if [ $newinstall -eq 1 ]; then
 	sleep 5

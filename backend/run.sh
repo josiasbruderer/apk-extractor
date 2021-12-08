@@ -52,6 +52,7 @@ for i in ${freeapps[*]}; do
   cp "apps/$i/" "../frontend/apps/" -r
   cp "debug/$i/" "../frontend/debug/" -r
   yes | cp "debug/errors.log" "../frontend/debug/" -rf
+  yes | cp "debug/success.log" "../frontend/debug/" -rf
 done
 
 # process paid apps
@@ -60,6 +61,7 @@ for i in ${paidapps[*]}; do
   cp "apps/$i/" "../frontend/apps/" -r
   cp "debug/$i/" "../frontend/debug/" -r
   yes | cp "debug/errors.log" "../frontend/debug/" -rf
+  yes | cp "debug/success.log" "../frontend/debug/" -rf
 done
 
 sleep 5
