@@ -59,3 +59,20 @@ adb pull /system/product/app/messaging/messaging.apk /tmp/messaging.apk
 adb install-multiple app.apk config.apk
 ```
 * Run AnyDesk: https://support.google.com/android/thread/13791498/disable-warning-about-casting?hl=en&msgid=62539685
+
+* Install Cron: 
+
+```shell
+pacman -S cronie
+systemctl enable cronie
+systemctl start cronie
+
+su [username]
+
+export EDITOR=/bin/nano
+export VISUAL=nano
+
+crontab -e
+
+52 */1 * * *        /srv/http/apk-extractor/backend/run.sh
+```
