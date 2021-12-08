@@ -74,5 +74,5 @@ export VISUAL=nano
 
 crontab -e
 
-52 */1 * * *        /srv/http/apk-extractor/backend/run.sh
+2 */1 * * *        /srv/http/apk-extractor/backend/run.sh 2>&1 | /usr/bin/logger -t apk-extractor
 ```
