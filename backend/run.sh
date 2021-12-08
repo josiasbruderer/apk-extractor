@@ -41,14 +41,14 @@ done < config/paid-apps.txt
 # process free apps
 for i in ${freeapps[*]}; do
   ./scripts/download-apk.sh "$i"
-  cp "apps/$i" "../frontend/apps/" -r
-  cp "debug/$i" "../frontend/debug/" -r
+  cp "apps/$i/" "../frontend/apps/" -r
+  cp "debug/$i/" "../frontend/debug/" -r
 done
 
 # process paid apps
 for i in ${paidapps[*]}; do
   ./scripts/download-apk.sh "$i"
-  cp "apps/$i" "../frontend/apps/" -r
-  cp "debug/$i" "../frontend/debug/" -r
+  cp "apps/$i/" "../frontend/apps/" -r
+  cp "debug/$i/" "../frontend/debug/" -r
 done
 
