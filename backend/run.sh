@@ -20,6 +20,14 @@ cd "$(dirname "$0")"  # change directory to make sure all relative paths work
 echo Connecting $androidDevice
 adb connect $androidDevice
 
+sleep 5
+adb shell screencap -p > debug/initial_before-restart.jpg
+yes | cp "debug/initial_before-restart.jpg" "../frontend/debug/" -rf
+#adb reboot # restart device for a clean state
+#sleep 60
+adb shell screencap -p > debug/initial_after-restart.jpg
+yes | cp "debug/initial_after-restart.jpg" "../frontend/debug/" -rf
+
 # prepare free apps
 i=0
 freeapps=()
@@ -54,3 +62,7 @@ for i in ${paidapps[*]}; do
   yes | cp "debug/errors.log" "../frontend/debug/" -rf
 done
 
+Sleep 5
+
+adb shell screencap -p > debug/end.jpg
+yes | cp "debug/end.jpg" "../frontend/debug/" -rf

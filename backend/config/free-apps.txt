@@ -17,7 +17,6 @@ it.niedermann.nextcloud.deck.play
 ua.com.streamsoft.pingtools
 de.hafas.android.db
 nextapp.fx
-at.bitfire.davdroid
 net.openvpn.openvpn
 com.vrem.wifianalyzer
 org.telegram.messenger

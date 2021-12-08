@@ -30,7 +30,11 @@ rm debug/$1/* 2> /dev/null
 adb shell screencap -p > debug/$1/01.jpg
 
 if [ "$(adb shell dumpsys power | grep mWakefulness= | grep -oE '(Awake|Dozing)')" == "Dozing" ] ; then
-	adb shell input keyevent 26
+  adb shell input keyevent 26 # unlock phone
+else
+  adb shell input keyevent 26 # lock phone
+  sleep 1
+  adb shell input keyevent 26 # unlock phone
 fi
 
 sleep 2
@@ -52,25 +56,37 @@ else
 	adb shell input tap 540 720 # setting for oneplus 3T
 
 	adb shell screencap -p > debug/$1/04.jpg
-	sleep 5
+	sleep 10
 	adb shell screencap -p > debug/$1/05.jpg
-	sleep 5
+	sleep 10
 	adb shell screencap -p > debug/$1/06.jpg
-	sleep 5
+	sleep 10
 	adb shell screencap -p > debug/$1/07.jpg
-	sleep 5
-	adb shell screencap -p > debug/$1/08.jpg
-	sleep 5
-	adb shell screencap -p > debug/$1/09.jpg
-	sleep 5
-	adb shell screencap -p > debug/$1/10.jpg
 
 	if [ "$(adb shell pm list packages $1)" == "package:$1" ]; then
-		echo "successfully installed $1"
+      echo "successfully installed $1"
 	else
-		echo "error installing $1"
-		echo "error installing $1" >> debug/errors.log
-		exit 1
+	  echo "error installing $1 --> try alternative position 1"
+	  eval "adb shell am start -a android.intent.action.VIEW -d 'market://details?id=$1'"
+	  sleep 2
+	  adb shell input tap 540 840 # alternative setting 1 for oneplus 3T
+
+      adb shell screencap -p > debug/$1/08.jpg
+      sleep 30
+      adb shell screencap -p > debug/$1/09.jpg
+
+      if [ "$(adb shell pm list packages $1)" == "package:$1" ]; then
+        echo "successfully installed $1"
+	  else
+        echo "error installing $1 --> try alternative position 2"
+        eval "adb shell am start -a android.intent.action.VIEW -d 'market://details?id=$1'"
+        sleep 2
+        adb shell input tap 780 720 # alternative setting 1 for oneplus 3T
+
+        adb shell screencap -p > debug/$1/10.jpg
+        sleep 30
+        adb shell screencap -p > debug/$1/11.jpg
+      fi
 	fi
 fi
 
@@ -85,12 +101,10 @@ echo "successfully downloaded $1"
 
 if [ $newinstall -eq 1 ]; then
 	sleep 5
-	adb shell screencap -p > debug/$1/11.jpg
-
-	adb reboot
-
-	sleep 60
 	adb shell screencap -p > debug/$1/12.jpg
+	adb reboot
+	sleep 60
+	adb shell screencap -p > debug/$1/13.jpg
 fi
 
 echo "done"
