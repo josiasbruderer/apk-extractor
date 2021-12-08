@@ -62,7 +62,7 @@ for i in ${paidapps[*]}; do
   yes | cp "debug/errors.log" "../frontend/debug/" -rf
 done
 
-Sleep 5
+sleep 5
 
 adb shell screencap -p > debug/end.jpg
 yes | cp "debug/end.jpg" "../frontend/debug/" -rf

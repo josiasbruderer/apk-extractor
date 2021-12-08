@@ -53,7 +53,7 @@ else
 
 	adb shell screencap -p > debug/$1/03.jpg
 	sleep 2
-	adb shell input tap 540 720 # setting for oneplus 3T
+	adb shell input tap 540 750 # setting for oneplus 3T
 
 	adb shell screencap -p > debug/$1/04.jpg
 	sleep 10
@@ -81,11 +81,18 @@ else
         echo "error installing $1 --> try alternative position 2"
         eval "adb shell am start -a android.intent.action.VIEW -d 'market://details?id=$1'"
         sleep 2
-        adb shell input tap 780 720 # alternative setting 1 for oneplus 3T
+        adb shell input tap 780 750 # alternative setting 1 for oneplus 3T
 
         adb shell screencap -p > debug/$1/10.jpg
         sleep 30
         adb shell screencap -p > debug/$1/11.jpg
+
+        if [ "$(adb shell pm list packages $1)" == "package:$1" ]; then
+          echo "successfully installed $1"
+        else
+          echo "error installing $1"
+          echo "error installing $1" >> debug/errors.log
+        fi
       fi
 	fi
 fi
