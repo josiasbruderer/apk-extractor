@@ -25,8 +25,26 @@ adb shell screencap -p > debug/initial_before-restart.jpg
 yes | cp "debug/initial_before-restart.jpg" "../frontend/debug/" -rf
 adb reboot # restart device for a clean state
 sleep 60
+adb connect $androidDevice
 adb shell screencap -p > debug/initial_after-restart.jpg
 yes | cp "debug/initial_after-restart.jpg" "../frontend/debug/" -rf
+sleep 2
+
+# install updates
+adb shell screencap -p > debug/before_updates.jpg
+yes | cp "debug/before_updates.jpg" "../frontend/debug/" -rf
+eval "adb shell monkey -p com.android.vending 1"
+sleep 4
+adb shell input tap 950 140 # setting for oneplus 3T
+sleep 2
+adb shell input tap 400 790 # setting for oneplus 3T
+sleep 2
+adb shell input tap 260 825 # setting for oneplus 3T
+sleep 60
+adb shell screencap -p > debug/after_updates.jpg
+yes | cp "debug/after_updates.jpg" "../frontend/debug/" -rf
+sleep 2
+adb shell input keyevent KEYCODE_HOME
 
 # prepare free apps
 i=0
