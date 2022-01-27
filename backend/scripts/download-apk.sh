@@ -44,7 +44,7 @@ adb shell screencap -p > debug/$1/02.jpg
 newinstall=0
 error=0
 
-if [ "$(adb shell pm list packages $1)" == "package:$1" ]; then
+if [ "$(adb shell pm list packages $1 | grep package:$1$)" == "package:$1" ]; then
 	echo "installation found for $1"
 else
 	newinstall=1
