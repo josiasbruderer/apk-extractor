@@ -13,7 +13,6 @@ ch.admin.swisstopo
 com.spotify.music
 ch.sbb.mobile.android.b2c
 com.nextcloud.client
-it.niedermann.nextcloud.deck.play
 ua.com.streamsoft.pingtools
 de.hafas.android.db
 nextapp.fx
